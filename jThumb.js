@@ -40,18 +40,19 @@
 		
 		function keepGoing()
         {		
-			var arg;
-			if (arg = getArguments( $(iElem).attr( options.attrName ) )) {}
-			else if (arg = getArguments( $(cElem).attr( options.attrName ) )) {}
-			else arg = getArguments( options.position );
+			var args;
+			if (args = getArguments( $(iElem).attr( options.attrName ) )) {}
+			else if (args = getArguments( $(cElem).attr( options.attrName ) )) {}
+			else args = getArguments( options.position );
 
-			console.log(getValues(arg));
+			
+			console.log(getValues(args));
         }
 		
 		
 		function getArguments(str)
         {
-			var arg = [];
+			var args = [];
 			var n = 0;
 			if (str != null && str != undefined && typeof str == "string" && str.length>=3)
 			{
@@ -59,23 +60,26 @@
 				var regresult;
 				for (var i=0; i<cut.length; ++i)
 				{
-					regresult = $.jThumb.const.regexp.exec(str);
+					console.log(i, cut[i]);
+					regresult = $.jThumb.const.regexp.exec(cut[i]);
+					console.log(regresult);
 					if (regresult != undefined && regresult != null && regresult[1] != undefined)
 					{
-						arg[n] = [regresult[1].toLowerCase()];
+						args[n] = [(regresult[1]).toLowerCase()];
 						if (regresult[4] != undefined)
-							arg[n][1] = regresult[4] + ((regresult[5] == undefined) ? options.standardUnit : regresult[5]);
+							args[n][1] = regresult[4] + ((regresult[5] == undefined) ? options.standardUnit : regresult[5]);
 						
 						n += 1;
 					}
+					console.log(cut.length, args.length);
 				}
+				console.log("----------------");
 			}
-			return (arg.length>0) ? arg : false;
+			return (args.length>0) ? args : false;
         }
 		
-		function getValues(arg)
+		function getValues(args)
         {
-			console.log(arg)
 			var cut = jQuery.trim($.jThumb.defaults.position).split(" ");
 			var values = {
 				positionX: cut[0],
@@ -85,31 +89,31 @@
 			};
 			
 			var xsetted, ysetted = false;
-			for (var i=0; i<arg.length; ++i)
+			for (var i=0; i<args.length; ++i)
 			{
-				if (arg[i][0] == "left" || arg[i][0] == "right")
+				if (args[i][0] == "left" || args[i][0] == "right")
 				{
-					values.positionX = arg[i][0];
+					values.positionX = args[i][0];
 					xsetted = true;
 				}
-				else if (arg[i][0] == "top" || arg[i][0] == "bottom")
+				else if (args[i][0] == "top" || args[i][0] == "bottom")
 				{
-					values.positionY = arg[i][0];
+					values.positionY = args[i][0];
 					ysetted = true;
 				}
-				else if (arg[i][0] == "center")
+				else if (args[i][0] == "center")
 				{
 					if (!xsetted)
 					{
 						xsetted = true;
-						values.positionX = arg[i][0];
+						values.positionX = args[i][0];
 					}
 					else (!ysetted)
-						values.positionY = arg[i][0];
+						values.positionY = args[i][0];
 				}
-				else if (arg[i][0] == "allowscale")
+				else if (args[i][0] == "allowscale")
 					values.allowScale = true;
-				else if (arg[i][0] == "allowzoom")
+				else if (args[i][0] == "allowzoom")
 					values.allowZoom = true;
 			}
 			
