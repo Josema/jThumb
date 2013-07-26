@@ -42,14 +42,29 @@
 
 		function keepGoing()
         {		
-			var args = [
-				getArguments( options.align ),
-				getArguments( $(cElem).attr( options.attrName )),
-				getArguments( $(iElem).attr( options.attrName ))
-			];
-
+			var args = [];
+			args = args.concat(getArguments( options.align ));
+			args = args.concat(getArguments( $(cElem).attr( options.attrName )));
+			args = args.concat(getArguments( $(iElem).attr( options.attrName )))
+			
 			var config = getConfig(args);
-			console.log(args);
+			console.log(args)
+			console.log(config)
+			
+			var wider = higher = false;
+			if (iWidth > cWidth)
+				wider = true;
+			if (iHeight > cHeight)
+				higher = true;
+			
+			console.log($(iElem).attr("src"))
+			
+			if (config.allowResize && (wider || higher))
+				console.log(iWidth, iHeight, "resize")
+			else if (config.allowZoom && (!wider || !higher) && !(wider && higher))
+				console.log(iWidth, iHeight, "zoom")
+			else
+				console.log(iWidth, iHeight, "nothing")
         }
 		
 		
@@ -75,11 +90,11 @@
 					}
 				}
 			}
-			return (args.length>0) ? args : false;
+			return args;
         }
 
 
-		function getConfig(argslist)
+		function getConfig(args)
         {
 			var cut = jQuery.trim($.jThumb.defaults.align).split(" ");
 			var values = {
@@ -87,69 +102,60 @@
 				alignY: cut[1],
 				paddingX: 0+options.standardUnit,
 				paddingY: 0+options.standardUnit,
-				allowScale: options.allowScale,
+				allowResize: options.allowResize,
 				allowZoom: options.allowZoom
 			};
 			
-			
-			var j, i, args, alignX, alignY, centeri, center;
-			for (j=0; j<argslist.length; ++j)
+			var i, alignX, alignY;
+			var resize, zoom;
+			for (i=(args.length-1); i>=0 && (alignX==null || alignY==null); --i)
 			{
-				alignX = alignY = null;
-				centeri = 0;
-				center = [];
-				args = argslist[j];
-
-				for (i=0; i<args.length; ++i)
+				if (args[i][0] == "left" || args[i][0] == "right" || args[i][0] == "center")
 				{
-					if (args[i][0] == "left" || args[i][0] == "right")
+					if (alignX != null && (args[i][0]=="center" || alignX[0] == "center"))
+					{
+						alignY = alignX;
 						alignX = args[i];
-	
-					else if (args[i][0] == "top" || args[i][0] == "bottom")
-						alignY = args[i];
-	
-					else if (args[i][0] == "center")
-						center[centeri++] = args[i];
-	
-					else if (args[i][0] == "allowscale")
-						values.allowScale = true;
-	
-					else if (args[i][0] == "allowzoom")
-						values.allowZoom = true;
-				}
-				
-				if (alignX != undefined)
-					values.alignX = alignX;
-				if (alignY != undefined)
-					values.alignY = alignY;
-	
-				if (alignX == undefined && center.length > 0)
-					values.alignX = center[center.length-1];
-				if (alignY == undefined)
-				{
-				 	if ((center.length==1 && alignX!=undefined) || (center.length>1))
-				 	{
-						values.alignY = center[center.length-1];
-						if (values.alignX[0] == "center" && (center.length>1))
-							values.alignY = center[center.length-2];
 					}
+					else if (alignX == null)
+						alignX = args[i];
 				}
-				
-				if (typeof values.alignX != "string" && values.alignX[0] != undefined)
+				else if (alignY == null && (args[i][0]=="top" || args[i][0]=="bottom"))
+					alignY = args[i];
+					
+				else if (resize == null && args[i][0] == "allowresize")
 				{
-					if (values.alignX[1] != undefined)
-						values.paddingX = values.alignX[1][0] + (((values.alignX[1][1] != undefined)) ? values.alignX[1][1] : options.standardUnit);
-	
-					values.alignX = values.alignX[0];
+					values.allowResize = true;
+					resize = true;
 				}
-				if (typeof values.alignY != "string" && values.alignY[0] != undefined)
+				else if (zoom == null && args[i][0] == "allowzoom")
 				{
-					if (values.alignY[1] != undefined)
-						values.paddingY = values.alignY[1][0] + (((values.alignY[1][1] != undefined)) ? values.alignY[1][1] : options.standardUnit);
-	
-					values.alignY = values.alignY[0];
+					values.allowZoom = true;
+					zoom = true;
 				}
-				console.log(values);
+				else if (resize == null && args[i][0] == "noresize")
+				{
+					values.allowResize = false;
+					resize = true;
+				}
+				else if (zoom == null && args[i][0] == "nozoom")
+				{
+					values.allowZoom = false;
+					zoom = true;
+				}
+			}
+
+			if (alignX != undefined)
+			{
+				values.alignX = alignX[0];
+				if (alignX[1] != undefined)
+					values.paddingX = alignX[1][0] + (((alignX[1][1] != undefined)) ? alignX[1][1] : options.standardUnit);
+			}
+			if (alignY != undefined)
+			{
+				values.alignY = alignY[0];
+				if (alignY[1] != undefined)
+					values.paddingY = alignY[1][0] + (((alignY[1][1] != undefined)) ? alignY[1][1] : options.standardUnit);
 			}
 
 			return values;
@@ -159,8 +165,8 @@
 
     $.jThumb.defaults = {
 		img: "> img",
-		align: "AAAA BBBB",
-		allowScale: false,
+		align: "center center",
+		allowResize: false,
 		allowZoom: false,
 		onError: null,
 		onLoadImage: null,
@@ -178,7 +184,7 @@
 	
 	
 	$.jThumb.const = {
-		regexp: /(center|left|top|right|bottom|allowscale|allowzoom)(\((([-0-9]+)(%|px|pt|em|cm|in)?)?\))?/i
+		regexp: /(center|left|top|right|bottom|allowresize|allowzoom|noresize|nozoom)(\((([-0-9]+)(%|px|pt|em|cm|in)?)?\))?/i
 	};
 
 })(jQuery);

@@ -7,10 +7,18 @@
 <script src="jThumb.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".thumb").jThumb({align: "left top", onError: function(a,b,c){alert(a)}});
+    $(".thumb").jThumb({ allowResize: true, allowZoom: true});
 });
 </script>
 <style>
+div.wrapThumb
+{
+	width:150px;
+	height:150px;
+	overflow:hidden;
+	background: #CCC;
+	float:left
+}
 div.thumb
 {
   overflow: hidden;
@@ -18,114 +26,130 @@ div.thumb
 }
 div.thumb > img
 {
-  height:100%;
 }
 </style>
 </head>
 <body>
 
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="right"><img  src="howl.png" jthumb="center" /></div>
+
+<div class="wrapThumb">
+	<div class="thumb" jthumb=""><img  src="small.jpg" jthumb="" /></div>
 </div>
-left(-1) center center(88px) CENTER(-5pt) center allowzoom
+<div class="wrapThumb">
+	<div class="thumb" jthumb=""><img  src="higher.jpg" jthumb="nozoom" /></div>
+</div>
+<div class="wrapThumb">
+	<div class="thumb" jthumb=""><img  src="wider.jpg" jthumb="noresize" /></div>
+</div>
+<div class="wrapThumb">
+	<div class="thumb" jthumb=""><img  src="xhigh.jpg" jthumb="noresize" /></div>
+</div>
+<div class="wrapThumb">
+	<div class="thumb" jthumb=""><img  src="yhigh.jpg" jthumb="" /></div>
+</div>
+
+
 <!--
+
+
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="bottom center(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom center top center" /></div>
 </div>
 
 
 
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="center top allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center top bottom  center" /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="center bottom(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center bottom bottom " /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="center left(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center left bottom  center" /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="center right(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center right left  center" /></div>
 </div>
 
 
 
-
-
-
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="left center(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="right center(25%) allowscale allowzoom" /></div>
-</div>
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="right top(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="right bottom(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="left top(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="left bottom(25%) allowscale allowzoom" /></div>
-</div>
-
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="top right(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="bottom right(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="top left(25%) allowscale allowzoom" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="bottom left(25%) allowscale allowzoom" /></div>
-</div>
 
 
 
 
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="center(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left center  center top " /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="left(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right center top " /></div>
+</div>
+
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right top center bottom " /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="bottom(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right bottom bottom " /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="right(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left top bottom center " /></div>
 </div>
 
 <div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="LEFT(-1000000000000px)"><img  src="howl.png" jthumb="top(25%) allowscale allowzoom" /></div>
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left  center bottom bottom " /></div>
 </div>
--->
+
+
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb=" center top right left " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb=" center bottom right left " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="top left center  bottom " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom left bottom " /></div>
+</div>
+
+
+
+
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center top " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left bottom " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom bottom " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb="cENter(-200000%)"><img  src="howl.png" jthumb="right left " /></div>
+</div>
+
+<div style="width:150px; height:150px; overflow:hidden">
+<div class="thumb" jthumb=""><img  src="howl.png" jthumb="top bottom " /></div>
+</div>
     
+-->
+
 </body>
 </html>
