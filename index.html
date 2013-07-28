@@ -7,17 +7,20 @@
 <script src="jThumb.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".thumb").jThumb({ allowResize: true, allowZoom: true});
+	thumb = $(".resizes").jThumb({ allowResize: true, allowZoom: true});
+    //console.log(thumb);
 });
 </script>
 <style>
-div.wrapThumb
+div.wrapThumb, div.resizes
 {
 	width:150px;
 	height:150px;
 	overflow:hidden;
 	background: #CCC;
-	float:left
+	float:left;
+	margin-right:10px;
+	border: 3px solid #368;
 }
 div.thumb
 {
@@ -32,124 +35,45 @@ div.thumb > img
 <body>
 
 
+<!--
 <div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="small.jpg" jthumb="" /></div>
+	<div class="thumb" jthumb=""><img  src="small.jpg" id="example" width="400" height="500" jthumb="" /></div>
 </div>
 <div class="wrapThumb">
 	<div class="thumb" jthumb=""><img  src="higher.jpg" jthumb="nozoom" /></div>
 </div>
 <div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="wider.jpg" jthumb="noresize" /></div>
+	<div class="thumb" jthumb=""><img  src="wider.jpg" jthumb="" /></div>
 </div>
 <div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="xhigh.jpg" jthumb="noresize" /></div>
+	<div class="thumb" jthumb=""><img  src="xhigh.jpg" jthumb="" /></div>
 </div>
 <div class="wrapThumb">
 	<div class="thumb" jthumb=""><img  src="yhigh.jpg" jthumb="" /></div>
-</div>
-
-
-<!--
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom center top center" /></div>
-</div>
-
-
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center top bottom  center" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center bottom bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center left bottom  center" /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center right left  center" /></div>
-</div>
+</div>-->
 
 
 
 
 
 
+	<div class="resizes" style="width:150; height:75px"><img  src="higher.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img  src="higher.jpg" /></div>
 
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left center  center top " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right center top " /></div>
-</div>
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right top center bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="right bottom bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left top bottom center " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left  center bottom bottom " /></div>
-</div>
+	<div class="resizes" style="width:150; height:75px"><img  src="wider.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img  src="wider.jpg" /></div>
+	
+	<div class="resizes" style="width:150; height:75px"><img jthumb="nozoom" src="small.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img jthumb="" src="small.jpg" /></div>
+	
+	<div class="resizes" style="width:150; height:75px"><img  src="xhigh.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img  src="xhigh.jpg" /></div>
+	
+	<div class="resizes" style="width:150; height:75px"><img  src="yhigh.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img  src="yhigh.jpg" /></div>
 
 
 
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb=" center top right left " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb=" center bottom right left " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="top left center  bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom left bottom " /></div>
-</div>
-
-
-
-
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="center top " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="left bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="bottom bottom " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb="cENter(-200000%)"><img  src="howl.png" jthumb="right left " /></div>
-</div>
-
-<div style="width:150px; height:150px; overflow:hidden">
-<div class="thumb" jthumb=""><img  src="howl.png" jthumb="top bottom " /></div>
-</div>
-    
--->
 
 </body>
 </html>

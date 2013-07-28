@@ -1,75 +1,114 @@
 (function($) {
 
-    $.fn.extend({
-        jThumb: function( options )
+	$.fn.extend({
+		jThumb: function( options )
 		{
-           options = $.extend( {}, $.jThumb.defaults, options );
-
-            this.each(function() {
-                $.jThumb(this, options );
-            });
-            return;
-        }
-    });
+			return new $.jThumb(this, options);
+		}
+	});
 
 
-    $.jThumb = function( cElem, options )
+	$.jThumb = function( elements, optionsInstance )
 	{
-		var cWidth = $(cElem).width();
-		var cHeight = $(cElem).height();
-		var iWidth, iHeight;
-		var iElem = $(cElem).find( options.img )[0];
-
-		if (iElem != null && typeof iElem == "object" && $(iElem).is("img"))
-			getRealSizeImage($(iElem).attr("src"));
-		else if (options.onError)
-			options.onError($.jThumb.error[0], cElem, iElem);
+		//var $this = this;
+		var thumbs = [];
+		var options;
+		optionsInstance = $.extend( {}, $.jThumb.defaults, optionsInstance );
 
 
-        function getRealSizeImage(src)
-        {
-			var img = new Image();
-			img.src = src;
-			img.onload = function() {
-				iWidth = this.width;
-				iHeight = this.height;
-				if (options.onLoadImage)
-					options.onLoadImage(img, cElem, iElem);
-				keepGoing();
+		/*public*/ this.set = function( optionsMethod, useCache )
+		{
+			options = $.extend( {}, optionsInstance, optionsMethod );
+			if (typeof(useCache) == 'undefined') useCache = true;
+			
+			var t, iElem;
+			if (!useCache)
+			{
+				t = 0;
+				elements.each(function()
+				{
+					thumbs[t] = {};
+					thumbs[t].index = t;
+					thumbs[t].cElem = this;
+					thumbs[t].cWidth = $(thumbs[t].cElem).width();
+					thumbs[t].cHeight = $(thumbs[t].cElem).height();
+					iElem = $(thumbs[t].cElem).find( options.img )[0];
+					
+					if (iElem != null && typeof(iElem) == "object" && $(iElem).is("img"))
+						thumbs[t].iElem = iElem;
+					else if (typeof(options.onError) == "function")
+						options.onError($.jThumb.error[0], thumbs[t]);
+
+					t += 1;
+				});
 			}
-        }
+
+			for (t in thumbs)
+				if (thumbs[t].iElem != null)
+					getRealSizeImage($(thumbs[t].iElem).attr("src"), afterLoadRealSizeImage, t);
+		}
+		this.set(null, false);
+		
+		
+		/*public*/ this.getThumbByIndex = function( index )
+		{
+			return thumbs[index];
+		}
 
 
-		function keepGoing()
-        {		
+		/*private*/ function afterLoadRealSizeImage( iW, iH, t )
+		{
+			thumbs[t].iWidth = iW;
+			thumbs[t].iHeight = iH;
+
+
+			//Getting the config
 			var args = [];
 			args = args.concat(getArguments( options.align ));
-			args = args.concat(getArguments( $(cElem).attr( options.attrName )));
-			args = args.concat(getArguments( $(iElem).attr( options.attrName )))
-			
+			args = args.concat(getArguments( $(thumbs[t].cElem).attr( options.attrName )));
+			args = args.concat(getArguments( $(thumbs[t].iElem).attr( options.attrName )));
 			var config = getConfig(args);
-			console.log(args)
-			console.log(config)
-			
+
+
+			//Resizing
 			var wider = higher = false;
-			if (iWidth > cWidth)
+			if (thumbs[t].iWidth > thumbs[t].cWidth)
 				wider = true;
-			if (iHeight > cHeight)
+			if (thumbs[t].iHeight > thumbs[t].cHeight)
 				higher = true;
-			
-			console.log($(iElem).attr("src"))
-			
-			if (config.allowResize && (wider || higher))
-				console.log(iWidth, iHeight, "resize")
-			else if (config.allowZoom && (!wider || !higher) && !(wider && higher))
-				console.log(iWidth, iHeight, "zoom")
+
+			var newSize;
+			if ((config.allowResize && (wider && higher)) || (config.allowZoom && (!wider || !higher)))
+				newSize = getSize(thumbs[t].cWidth, thumbs[t].cHeight, thumbs[t].iWidth, thumbs[t].iHeight);
 			else
-				console.log(iWidth, iHeight, "nothing")
-        }
-		
-		
-		function getArguments(str)
-        {
+				newSize = [thumbs[t].iWidth, thumbs[t].iHeight];
+			$(thumbs[t].iElem).width(newSize[0]);
+			$(thumbs[t].iElem).height(newSize[1]);
+
+
+			//Positioning
+			var newPos = getPosition(config.alignX, config.alignY, thumbs[t].cWidth, thumbs[t].cHeight, newSize[0], newSize[1]);
+			$(thumbs[t].iElem).css(options.moveX, newPos[0]);
+			$(thumbs[t].iElem).css(options.moveY, newPos[1]);
+		}
+
+
+		/*private*/ function getRealSizeImage( src, callback, t )
+		{
+			var tempImg = new Image();
+			tempImg.src = src;
+			tempImg.onload = function()
+			{
+				if (typeof options.onLoadImage == "function")
+					options.onLoadImage(tempImg, thumbs[t]);
+
+				callback(this.width, this.height, t);
+			};
+		}
+
+
+		/*private*/ function getArguments( str )
+		{
 			var args = [];
 			var n = 0;
 			if (str != null && str != undefined && typeof str == "string" && str.length>=3)
@@ -78,7 +117,7 @@
 				var regresult;
 				for (var i=0; i<cut.length; ++i)
 				{
-					regresult = $.jThumb.const.regexp.exec(cut[i]);
+					regresult = $.jThumb.consts.regexp.exec(cut[i]);
 
 					if (regresult != undefined && regresult != null && regresult[1] != undefined)
 					{
@@ -91,11 +130,11 @@
 				}
 			}
 			return args;
-        }
+		}
 
 
-		function getConfig(args)
-        {
+		/*private*/ function getConfig( args )
+		{
 			var cut = jQuery.trim($.jThumb.defaults.align).split(" ");
 			var values = {
 				alignX: cut[0],
@@ -160,32 +199,56 @@
 
 			return values;
 		}
-    };
+
+		/*private*/ function getSize( cW, cH, iW, iH )
+		{
+			var scaleW = Math.round((iW*cH)/iH);
+			var scaleH = Math.round((iH*cW)/iW);
+			return (scaleH<cH) ? [scaleW, cH] : [cW, scaleH];
+		}
+		
+		/*private*/ function getPosition( x, y, cW, cH, iW, iH )
+		{
+			var newX = newY = 0;
+			if (x == "right")
+				newX = (cW-iW);
+			else if (x == "center")
+				newX = Math.round((cW-iW)/2);
+				
+			if (y == "bottom")
+				newY = (cH-iH);
+			else if (y == "center")
+				newY = Math.round((cH-iH)/2);
+
+			return [newX, newY];
+		}
+	};
 
 
-    $.jThumb.defaults = {
+
+	$.jThumb.defaults = {
 		img: "> img",
 		align: "center center",
 		allowResize: false,
 		allowZoom: false,
 		onError: null,
 		onLoadImage: null,
-		
 		attrName: "jthumb",
 		moveX: "margin-left",
 		moveY: "margin-top",
 		standardUnit: "px"
 	};
-	
+
+
+	$.jThumb.consts = {
+		regexp: /(center|left|top|right|bottom|allowresize|allowzoom|noresize|nozoom)(\((([-0-9]+)(%|px|pt|em|cm|in)?)?\))?/i
+	};
+
 
 	$.jThumb.error = [
 		"Image not found inside the container"
 	];
-	
-	
-	$.jThumb.const = {
-		regexp: /(center|left|top|right|bottom|allowresize|allowzoom|noresize|nozoom)(\((([-0-9]+)(%|px|pt|em|cm|in)?)?\))?/i
-	};
+
 
 })(jQuery);
 
