@@ -40,7 +40,7 @@ $("div.thumbContainer").jThumb();
 > ## `align` (string)
 
 ```javascript
-$("div.mythumb").jThumb({ align: "right bottom" });
+$("div.thumbContainer").jThumb({ align: "right bottom" });
 ```
 Default is: `"center center"`
 
@@ -61,7 +61,7 @@ This attributte is used when you have a complex layout on your html, for example
 Then you should use something like this:
 
 ```javascript
-$("div.mythumb").jThumb({ img: "div a img.tothumb" });
+$("div.thumbContainer").jThumb({ img: "div a img.tothumb" });
 ```
 Default is: `"> img"`
 
