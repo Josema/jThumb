@@ -10,7 +10,7 @@ jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images pr
 ```html
 <div class="thumbContainer"><img src="tiger.jpg" /></div>
 ```
----
+<br/><br/>
 
 > ### 2. Add the CSS for the container. ##
 
