@@ -2,22 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
-<script src="jquery.min.js"></script>
-<script src="jThumb.js"></script>
+<title>jThumb tests</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../src/jThumb.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	thumb = $(".resizes").jThumb({ 
-		
+	var thumb = $(".resizes").jThumb({ 
 		resize: true,
 		zoom: true,
 		crop: true
-		/*onAfter:function(a){alert("onAfter")},
-		onBefore:function(a){alert("onBefore")},
-		onFinish:function(a){alert("onFinish")}*/
-		
-		});
-    //console.log(thumb);
+		/*onAfter:function(a){console.log("onAfter")},
+		onBefore:function(a){console.log("onBefore")},
+		onFinish:function(a){console.log("onFinish")}*/
+	});
 });
 </script>
 <style>
@@ -49,12 +46,6 @@ div.resizes
 	
 	<div class="resizes" style="width:150; height:75px"><img  src="yhigh.jpg" /></div>
 	<div class="resizes" style="width:75px; height:150px"><img  src="yhigh.jpg" /></div>
-	<!--
-		
-		
-	
-	-->
-
 
 </body>
 </html>

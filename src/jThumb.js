@@ -1,3 +1,37 @@
+/*                              
+                                        ys`
+                                        -Md
+                                         hM+
+                                         -MN`
+                                          yMs
+                                          .MM-
+                                           sMd
+                                           .NM/
+                                            sMm`
+         +dmmh                              `NMo
+        sMMMMh                               oMN.
+       `MMMMMs                               `NMy
+       :MMMMM+                                +MM:
+       sMMMMM:                                 mMm 
+       dMMMMM.                                 /MM+
+      `MMMMMM`                                  mMN`
+      /MMMMMm                                   /MMs
+      sMMMMMh                                    dMM-
+      mMMMMMy                     /:             :MMh
+     `MMMMMMy                    :MMs             mMM/
+     /MMMMMMd                    /MMM:            yMMm`
+     sMMMMMMM/                   :MMMd  ``...--::+NMMMo
+     mMMMMMMMMh+::://++oossyyyhhdmMMMMNMMMMMMMMMMMMMMMm
+     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh
+     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNmdhyyso+/:-`
+     hMMMMMMMMMMMMMMMMMMMMMNmdhyso+/:-.`
+     `odNMMMNmdhyso+/:-.``
+
+
+            https://bitbucket.org/EnZo/jthumb
+
+*/
+
 (function($) {
 
 	$.fn.extend({
