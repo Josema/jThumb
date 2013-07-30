@@ -7,12 +7,18 @@
 <script src="jThumb.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	thumb = $(".resizes").jThumb({ allowResize: true, allowZoom: true});
+	thumb = $(".resizes").jThumb({ resize: true, zoom: true, 
+		
+		/*onAfter:function(a){alert("onAfter")},
+		onBefore:function(a){alert("onBefore")},
+		onFinish:function(a){alert("onFinish")}*/
+		
+		});
     //console.log(thumb);
 });
 </script>
 <style>
-div.wrapThumb, div.resizes
+div.resizes
 {
 	width:150px;
 	height:150px;
@@ -22,57 +28,28 @@ div.wrapThumb, div.resizes
 	margin-right:10px;
 	border: 3px solid #368;
 }
-div.thumb
-{
-  overflow: hidden;
-  height:100%;
-}
-div.thumb > img
-{
-}
 </style>
 </head>
 <body>
-
-
-<!--
-<div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="small.jpg" id="example" width="400" height="500" jthumb="" /></div>
-</div>
-<div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="higher.jpg" jthumb="nozoom" /></div>
-</div>
-<div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="wider.jpg" jthumb="" /></div>
-</div>
-<div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="xhigh.jpg" jthumb="" /></div>
-</div>
-<div class="wrapThumb">
-	<div class="thumb" jthumb=""><img  src="yhigh.jpg" jthumb="" /></div>
-</div>-->
-
-
-
-
-
-
-	<div class="resizes" style="width:150; height:75px"><img  src="higher.jpg" /></div>
+	
+	<div class="resizes" style="width:150; height:75px"><img jthumb="left noresize" src="higher.jpg" /></div>
 	<div class="resizes" style="width:75px; height:150px"><img  src="higher.jpg" /></div>
 
 	<div class="resizes" style="width:150; height:75px"><img  src="wider.jpg" /></div>
 	<div class="resizes" style="width:75px; height:150px"><img  src="wider.jpg" /></div>
 	
-	<div class="resizes" style="width:150; height:75px"><img jthumb="nozoom" src="small.jpg" /></div>
-	<div class="resizes" style="width:75px; height:150px"><img jthumb="" src="small.jpg" /></div>
+	<div class="resizes" style="width:150; height:75px"><img jthumb="noresize" src="small.jpg" /></div>
+	<div class="resizes" style="width:75px; height:150px"><img jthumb="left bottom" src="small.jpg" /></div>
 	
 	<div class="resizes" style="width:150; height:75px"><img  src="xhigh.jpg" /></div>
 	<div class="resizes" style="width:75px; height:150px"><img  src="xhigh.jpg" /></div>
 	
 	<div class="resizes" style="width:150; height:75px"><img  src="yhigh.jpg" /></div>
 	<div class="resizes" style="width:75px; height:150px"><img  src="yhigh.jpg" /></div>
+	<!--
+	<div class="resizes" style="width:150; height:75px"><img style="left:-25%;position:relative" jthumb="center noresize nozoom" src="higher.jpg" /></div>
 
-
+-->
 
 
 </body>
