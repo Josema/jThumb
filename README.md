@@ -5,14 +5,14 @@ jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images pr
 
 
 # [How to use](#) #
-> ### 1. Add your image with his container ##
+# 1. Add your image with his container
 
 ```html
 <div class="thumbContainer"><img src="tiger.jpg" /></div>
 ```
-<br/><br/>
 
-> ### 2. Add the CSS for the container. ##
+
+# 2. Add the CSS for the container.
 
 ```html
 div.thumbContainer
@@ -24,9 +24,9 @@ div.thumbContainer
 ```
 You have to add the overflow hidden to hide the remaining space of the image.
 
----
 
-> ### 3. Add the javascript.
+
+# 3. Add the javascript.
 
 ```javascript
 $("div.thumbContainer").jThumb();
@@ -37,7 +37,7 @@ $("div.thumbContainer").jThumb();
 # [Documentation](#) #
 
 ## Optional Parameters ##
-> ### `align` (string)
+> ## `align` (string)
 
 ```javascript
 $("div.mythumb").jThumb({ align: "right bottom" });
@@ -46,7 +46,7 @@ Default is: `"center center"`
 
 ---
 
-> ### `img` (string)
+> ## `img` (string)
 
 This attributte is used when you have a complex layout on your html, for example:
 
