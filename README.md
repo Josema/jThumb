@@ -100,3 +100,45 @@ $("div.thumbContainer").jThumb({ crop: false });
 ```
 
 Default is: `true`
+
+---
+
+
+
+
+
+
+
+
+> ### `resize` (boolean)
+
+If you set resize as false and the picture is higher than the container, the picture never will be resized.
+
+![Resize](https://bitbucket.org/EnZo/jthumb/raw/f04164e90516e1d26fe7ca078088c46b2b643d5e/documentation/resize.jpg)
+
+```javascript
+$("div.thumbContainer").jThumb({ resize: false });
+```
+
+Default is: `true`
+
+---
+
+
+
+
+
+
+> ### `zoom` (boolean)
+
+If you set zoom as true and the original image is smaller than the container, the size of the picture will be resized. Default is false because this could cause distorsion of the picture.
+
+![Zoom](https://bitbucket.org/EnZo/jthumb/raw/f04164e90516e1d26fe7ca078088c46b2b643d5e/documentation/zoom.jpg)
+
+```javascript
+$("div.thumbContainer").jThumb({ zoom: true });
+```
+
+Default is: `false`
+
+---
