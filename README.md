@@ -8,20 +8,14 @@ jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images pr
 
 # [How to use](#) #
 
-# 1. Add the jQuery and jThumb libraries
-```html
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/jThumb.min.js"></script>
-```
-
-# 2. Add your image under a container
+# 1. Add your image under a container
 
 ```html
 <div class="thumbContainer"><img src="tiger.jpg" /></div>
 ```
 
 
-# 3. Add the CSS for the container.
+# 2. Add the CSS for the container.
 
 ```html
 div.thumbContainer
@@ -34,8 +28,7 @@ div.thumbContainer
 You have to add the overflow hidden to hide the remaining space of the image.
 
 
-
-# 4. Add the javascript.
+# 3. Add the javascript.
 
 ```javascript
 $(document).ready(function() {
@@ -50,6 +43,8 @@ $(document).ready(function() {
 # [Documentation](#) #
 
 ## Optional Parameters ##
+
+
 > ### `align` (string)
 
 ```javascript
@@ -58,6 +53,12 @@ $("div.thumbContainer").jThumb({ align: "right bottom" });
 Default is: `"center center"`
 
 ---
+
+
+
+
+
+
 
 > ### `img` (string)
 
@@ -78,5 +79,24 @@ $("div.thumbContainer").jThumb({ img: "div a img.tothumb" });
 ```
 Default is: `"> img"`
 
+---
 
 
+
+
+
+
+
+
+
+> ### `crop` (boolean)
+
+If you set crop as false the picture never will have remaining space.
+
+![Crop](https://bitbucket.org/EnZo/jthumb/raw/6846ddf628be7d2d6be0c2437fe82a85ecd9c2a8/documentation/crop.jpg)
+
+```javascript
+$("div.thumbContainer").jThumb({ crop: false });
+```
+
+Default is: `true`
