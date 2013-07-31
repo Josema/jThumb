@@ -37,7 +37,7 @@ $("div.thumbContainer").jThumb();
 # [Documentation](#) #
 
 ## Optional Parameters ##
-> ## `align` (string)
+> # `align` (string)
 
 ```javascript
 $("div.thumbContainer").jThumb({ align: "right bottom" });
@@ -46,7 +46,7 @@ Default is: `"center center"`
 
 ---
 
-> ## `img` (string)
+> # `img` (string)
 
 This attributte is used when you have a complex layout on your html, for example:
 
