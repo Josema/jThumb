@@ -45,20 +45,20 @@
 	$.jThumb = function( elements, optionsInstance )
 	{
 		//var $this = this;
-		var thumbs = [];
-		var options;
-		var loadeds = 0;
+		var thumbs = [], options, loadeds, errors;
 		optionsInstance = $.extend( {}, $.jThumb.defaults, optionsInstance );
 
 
 		this.set = function( optionsMethod, useCache ) // public
 		{
+			loadeds = 0;
 			options = $.extend( {}, optionsInstance, optionsMethod );
 			if (typeof useCache == 'undefined') useCache = true;
 			
 			var index, iElem;
 			if (!useCache)
 			{
+				errors = 0;
 				index = 0;
 				elements.each(function()
 				{
@@ -80,7 +80,7 @@
 			else
 			{
 				for (index in thumbs)
-					if (thumbs[index].iElem != null && thumbs[index].iWidth>0 && thumbs[index].iHeight)
+					if (thumbs[index].iElem != null && thumbs[index].iWidth>0 && thumbs[index].iHeight>0)
 						afterLoadRealSizeImage(index);
 			}
 		}
@@ -95,9 +95,12 @@
 
 		function afterLoadRealSizeImage( index ) // private
 		{
+			loadeds += 1;
+			
 			if (typeof options.onBefore == "function")
 				options.onBefore(thumbs[index]);
-			
+
+
 			// Getting the config
 			var args = [];
 			args = args.concat(getArguments( options.align ));
@@ -127,18 +130,20 @@
 			// Events
 			if (typeof options.onAfter == "function")
 				options.onAfter(thumbs[index]);
-			if (loadeds == elements.length && typeof options.onFinish == "function")
+			if (loadeds == (thumbs.length-errors) && typeof options.onFinish == "function")
 				options.onFinish(thumbs[index]);
 		}
 
 
 		function getRealSizeImage( iElem, index ) // private
-		{		
-			var img = $( document.createElement('img') );
+		{
+			var src = $(iElem).attr("src"),
+				img = $( document.createElement('img') );
+			
+			thumbs[index].iElem = iElem;
+			thumbs[index].tempImg = img;
 			img.bind( "load", { img: this }, function()
 			{
-				loadeds += 1; 
-				thumbs[index].iElem = iElem;
 				thumbs[index].iWidth = this.width;
 				thumbs[index].iHeight = this.height;
 				if (typeof options.onLoadImage == "function")
@@ -146,19 +151,24 @@
 				
 				afterLoadRealSizeImage(index);
 			});
-			img.attr( "src", $(iElem).attr("src") );
+			img.bind( "error", { img: this }, function()
+			{
+				errors += 1;
+				if (typeof options.onError == "function")
+					options.onError($.jThumb.error[1] + ': ' + src, thumbs[index]);
+			});
+			img.attr( "src", src );
 		}
 
 
 		function getArguments( str ) // private
 		{
-			var args = [];
-			var n = 0;
+			var args = [],
+				n = 0;
 			if (str != null && str != undefined && typeof str == "string" && str.length>=3)
 			{
-				var crop = jQuery.trim(str).split(" ");
-				var regresult;
-				for (var i=0; i<crop.length; ++i)
+				var i, regresult, crop = jQuery.trim(str).split(" ");
+				for (i=0; i<crop.length; ++i)
 				{
 					regresult = $.jThumb.consts.regexp.exec(crop[i]);
 
@@ -315,7 +325,8 @@
 
 
 	$.jThumb.error = [
-		"Image not found inside the container"
+		"Image not found inside the container",
+		"The image could not be loaded"
 	];
 
 
