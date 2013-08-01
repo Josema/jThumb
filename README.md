@@ -93,7 +93,7 @@ Default is: `"> img"`
 
 If you set crop as false the picture never will have remaining space.
 
-![Crop](https://bitbucket.org/EnZo/jthumb/raw/6846ddf628be7d2d6be0c2437fe82a85ecd9c2a8/documentation/crop.jpg)
+![Crop](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/crop.jpg)
 
 ```javascript
 $("div.thumbContainer").jThumb({ crop: false });
@@ -114,7 +114,7 @@ Default is: `true`
 
 If you set resize as false and the picture is higher than the container, the picture never will be resized.
 
-![Resize](https://bitbucket.org/EnZo/jthumb/raw/f04164e90516e1d26fe7ca078088c46b2b643d5e/documentation/resize.jpg)
+![Resize](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/resize.jpg)
 
 ```javascript
 $("div.thumbContainer").jThumb({ resize: false });
@@ -133,12 +133,115 @@ Default is: `true`
 
 If you set zoom as true and the original image is smaller than the container, the size of the picture will be resized. Default is false because this could cause distorsion of the picture.
 
-![Zoom](https://bitbucket.org/EnZo/jthumb/raw/f04164e90516e1d26fe7ca078088c46b2b643d5e/documentation/zoom.jpg)
+![Zoom](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/zoom.jpg)
 
 ```javascript
 $("div.thumbContainer").jThumb({ zoom: true });
 ```
 
 Default is: `false`
+
+---
+
+
+
+
+> ### Event `onError` (function)
+
+It's dispatched when some error is occurred.
+
+```javascript
+$("div.thumbContainer").jThumb({ onError: 
+	function(message, thumbObject){
+		console.log(message, thumbObject.index);
+	}
+});
+```
+
+Default is: `null`
+
+---
+
+
+
+> ### Event `onLoadImage` (function)
+
+To get the original size of the picture is necessary create a temporal image object and load the picture inside. So this event is dispatched when picture is loaded.
+
+```javascript
+$("div.thumbContainer").jThumb({ onLoadImage: 
+	function(message, thumbObject){
+		console.log(message, thumbObject.index);
+	}
+});
+```
+
+Default is: `null`
+
+---
+
+
+
+
+
+> ### Event `onBefore` (function)
+
+This event is dispatched before to be changed the position or size.
+
+```javascript
+$("div.thumbContainer").jThumb({ onBefore: 
+	function(message, thumbObject){
+		console.log(message, thumbObject.index);
+	}
+});
+```
+
+Default is: `null`
+
+---
+
+
+
+
+
+
+
+
+> ### Event `onAfter` (function)
+
+This event is dispatched after to be changed the position or size.
+
+```javascript
+$("div.thumbContainer").jThumb({ onAfter: 
+	function(message, thumbObject){
+		console.log(message, thumbObject.index);
+	}
+});
+```
+
+Default is: `null`
+
+---
+
+
+
+
+
+
+
+
+> ### Event `onFinish` (function)
+
+This event is dispatched after be changed the new config of all pictures.
+
+```javascript
+$("div.thumbContainer").jThumb({ onFinish: 
+	function(message, thumbObject){
+		console.log(message, thumbObject.index);
+	}
+});
+```
+
+Default is: `null`
 
 ---
