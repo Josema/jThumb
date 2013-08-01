@@ -55,7 +55,13 @@
 			options = $.extend( {}, optionsInstance, optionsMethod );
 			if (typeof useCache == 'undefined') useCache = true;
 			
-			var index, iElem;
+			if (options.background && typeof options.onError == "function" && !("backgroundSize" in document.body.style))
+			{
+				options.resize = options.zoom = false, options.crop = true;
+				options.onError($.jThumb.error[2]);
+			}
+			
+			var index;
 			if (!useCache)
 			{
 				errors = 0;
@@ -67,9 +73,11 @@
 					thumbs[index].cElem = this;
 					thumbs[index].cWidth = $(thumbs[index].cElem).width();
 					thumbs[index].cHeight = $(thumbs[index].cElem).height();
-					iElem = $(thumbs[index].cElem).find( options.img )[0];
 					
-					if (iElem != null && typeof iElem == "object" && $(iElem).is("img"))
+					var iElem = (options.img==null || options.img=='') ? this : $(thumbs[index].cElem).find( options.img )[0];
+					thumbs[index].iElem = iElem;
+
+					if (iElem != null && typeof iElem == "object" && ($(iElem).is("img") || options.background))
 						getRealSizeImage(iElem, index);
 					else if (typeof options.onError == "function")
 						options.onError($.jThumb.error[0], thumbs[index]);
@@ -111,8 +119,13 @@
 
 			// Resizing
 			var newSize = getSize(thumbs[index].cWidth, thumbs[index].cHeight, thumbs[index].iWidth, thumbs[index].iHeight, config.crop, config.resize, config.zoom);
-			$(thumbs[index].iElem).width(newSize[0]);
-			$(thumbs[index].iElem).height(newSize[1]);
+			if (options.background)
+				$(thumbs[index].iElem).css("backgroundSize", newSize[0] + "px " + newSize[1] + "px");
+			else
+			{
+				$(thumbs[index].iElem).width(newSize[0]);
+				$(thumbs[index].iElem).height(newSize[1]);
+			}
 
 
 			// Padding
@@ -123,8 +136,13 @@
 
 			// Alignment
 			var newPos = getPosition(config.alignX, config.alignY, thumbs[index].cWidth, thumbs[index].cHeight, newSize[0], newSize[1]);
-			$(thumbs[index].iElem).css(options.moveX, (newPos[0]+padding[0]));
-			$(thumbs[index].iElem).css(options.moveY, (newPos[1]+padding[1]));
+			if (options.background)
+				$(thumbs[index].iElem).css("backgroundPosition", newPos[0] + "px " + newPos[1] + "px");
+			else
+			{
+				$(thumbs[index].iElem).css(options.moveX, (newPos[0]+padding[0]));
+				$(thumbs[index].iElem).css(options.moveY, (newPos[1]+padding[1]));
+			}
 
 
 			// Events
@@ -137,10 +155,9 @@
 
 		function getRealSizeImage( iElem, index ) // private
 		{
-			var src = $(iElem).attr("src"),
+			var src = (options.background) ? $(iElem).css("backgroundImage").replace($.jThumb.consts.clean, "$1") : $(iElem).attr("src"),
 				img = $( document.createElement('img') );
-			
-			thumbs[index].iElem = iElem;
+
 			thumbs[index].tempImg = img;
 			img.bind( "load", { img: this }, function()
 			{
@@ -170,7 +187,7 @@
 				var i, regresult, crop = jQuery.trim(str).split(" ");
 				for (i=0; i<crop.length; ++i)
 				{
-					regresult = $.jThumb.consts.regexp.exec(crop[i]);
+					regresult = $.jThumb.consts.args.exec(crop[i]);
 
 					if (regresult != undefined && regresult != null && regresult[1] != undefined)
 					{
@@ -303,6 +320,7 @@
 
 
 	$.jThumb.defaults = {
+		background: false,
 		img: "> img",
 		align: "center center",
 		crop: true,
@@ -314,19 +332,21 @@
 		onAfter: null,
 		onFinish: null,
 		attrName: "jthumb",
-		moveX: "margin-left",
-		moveY: "margin-top"
+		moveX: "marginLeft",
+		moveY: "marginTop"
 	};
 
 
 	$.jThumb.consts = {
-		regexp: /(center|left|top|right|bottom|resize|noresize|zoom|nozoom|crop|nocrop)(\((([-0-9]+)(%|px)?)?\))?/i
+		args: /(center|left|top|right|bottom|resize|noresize|zoom|nozoom|crop|nocrop)(\((([-0-9]+)(%|px)?)?\))?/i,
+		clean: /url\("?([^")]+).*/i
 	};
 
 
 	$.jThumb.error = [
 		"Image not found inside the container",
-		"The image could not be loaded"
+		"The image could not be loaded",
+		"This browser doesn't support CSS3 for background-size"
 	];
 
 

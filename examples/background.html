@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jThumb tests</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="../src/jThumb.js"></script>
+<script type="text/javascript">
+var thumb;
+$(document).ready(function() {
+	thumb = $(".thumbs").jThumb({ 
+		resize: true,
+		zoom: true,
+		crop: false,
+		background: true,
+		img: null,
+		onError:function(a,b){console.log(a,b)},
+		/*onAfter:function(a){console.log("onAfter")},
+		onBefore:function(a){console.log("onBefore")},*/
+		onFinish:function(a){console.log("onFinish")}
+	});
+});
+</script>
+<style>
+div.thumbs
+{
+	width:150px;
+	height:150px;
+	overflow:hidden;
+	background: #CCC;
+	float:left;
+	margin-right:10px;
+	border: 3px solid #368;
+	background-repeat:no-repeat
+}
+</style>
+</head>
+<body>
+
+	<div class="thumbs" style="background-image:url('higher.jpg')"><div>text</div></div>
+
+</body>
+</html>
+
+
+<!--
+smaller
+-------
+nocrop noresize nozoom = nothing
+nocrop noresize zoom = zoomadjust
+nocrop resize nozoom = nothing
+nocrop resize zoom = zoomadjust
+crop noresize nozoom = nothing
+crop noresize zoom = zoom
+crop resize nozoom = nothing
+crop resize zoom = zoom
+
+
+bigger
+-------
+nocrop noresize nozoom = resizeadjust
+nocrop noresize zoom = resizeadjust
+nocrop resize nozoom = resizeadjust
+nocrop resize zoom = resizeadjust
+crop noresize nozoom = nothing
+crop noresize zoom = nothing
+crop resize nozoom = resize
+crop resize zoom = resize
+-->
+
+
+
+
+
