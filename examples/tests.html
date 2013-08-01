@@ -33,14 +33,14 @@ div.thumbs
 </style>
 </head>
 <body>
-	
+
 	<div class="thumbs" style="width:150; height:75px"><img jthumb="right noresize" src="higher.jpg" /></div>
 	<div class="thumbs" style="width:75px; height:150px"><img  src="highe.jpg" /></div>
 
 	<div class="thumbs" style="width:150; height:75px"><img  src="wider.jpg" /></div>
 	<div class="thumbs" style="width:75px; height:150px"><img  src="wider.jpg" /></div>
 	
-	<div class="thumbs" style="width:150; height:75px"><img jthumb="zoom" src="small.jpg" /></div>
+	<div class="thumbs" style="width:150px; height:150px"><img jthumb="crop resize nozoom" src="small.jpg" /></div>
 	<div class="thumbs" style="width:75px; height:150px"><img jthumb="left(-20) bottom crop" src="small.jpg" /></div>
 	
 	<div class="thumbs" style="width:150; height:75px"><img src="xhigh.jpg" /></div>
@@ -51,3 +51,34 @@ div.thumbs
 
 </body>
 </html>
+
+
+<!--
+smaller
+-------
+nocrop noresize nozoom = nothing
+nocrop noresize zoom = zoomadjust
+nocrop resize nozoom = nothing
+nocrop resize zoom = zoomadjust
+crop noresize nozoom = nothing
+crop noresize zoom = zoom
+crop resize nozoom = nothing
+crop resize zoom = zoom
+
+
+bigger
+-------
+nocrop noresize nozoom = resizeadjust
+nocrop noresize zoom = resizeadjust
+nocrop resize nozoom = resizeadjust
+nocrop resize zoom = resizeadjust
+crop noresize nozoom = nothing
+crop noresize zoom = nothing
+crop resize nozoom = resize
+crop resize zoom = resize
+-->
+
+
+
+
+

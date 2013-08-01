@@ -1,0 +1,11 @@
+ToFix
+
+
+
+Features
+- define width and height default of the container
+- set(options) -> setAll(options)
+- setThumb(index, options)
+- getPositionThumbByIndex(index, options)
+- width height minH minW maxH maxW of the picture
+- Change the position with a tween effect

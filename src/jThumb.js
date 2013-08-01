@@ -275,7 +275,7 @@
 		function getSize( cW, cH, iW, iH, crop, resize, zoom ) // private
 		{
 			var size = [iW, iH];
-			if (!crop || (resize && iW>cW && iH>cH) || (zoom && (iW<cW || iH<cH)))
+			if ((!(!zoom && (iW<cW || iH<cH))) && (!crop || (resize && iW>cW && iH>cH) || (zoom && (iW<cW || iH<cH))))
 			{
 				var scaleH = Math.round((iH*cW)/iW);
 				size = ((!crop && scaleH>cH) || (crop && scaleH<cH && (resize || zoom))) ? [Math.round((iW*cH)/iH), cH] : [cW, scaleH];
