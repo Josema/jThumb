@@ -146,6 +146,22 @@ Default is: `false`
 
 
 
+> ### `background` (boolean)
+
+This event is dispatched after be changed the new config of all pictures.
+
+```javascript
+$("div.thumbContainer").jThumb({ onFinish:false });
+```
+
+Default is: `false`
+
+---
+
+
+
+
+
 > ### Event `onError` (function)
 
 It's dispatched when some error is occurred.
@@ -170,8 +186,8 @@ To get the original size of the picture is necessary create a temporal image obj
 
 ```javascript
 $("div.thumbContainer").jThumb({ onLoadImage: 
-	function(message, thumbObject){
-		console.log(message, thumbObject.index);
+	function(tempImage, thumbObject){
+		console.log(tempImage, thumbObject.index);
 	}
 });
 ```
@@ -190,8 +206,8 @@ This event is dispatched before to be changed the position or size.
 
 ```javascript
 $("div.thumbContainer").jThumb({ onBefore: 
-	function(message, thumbObject){
-		console.log(message, thumbObject.index);
+	function(thumbObject){
+		console.log(thumbObject);
 	}
 });
 ```
@@ -213,8 +229,8 @@ This event is dispatched after to be changed the position or size.
 
 ```javascript
 $("div.thumbContainer").jThumb({ onAfter: 
-	function(message, thumbObject){
-		console.log(message, thumbObject.index);
+	function(thumbObject){
+		console.log(thumbObject);
 	}
 });
 ```
@@ -236,8 +252,8 @@ This event is dispatched after be changed the new config of all pictures.
 
 ```javascript
 $("div.thumbContainer").jThumb({ onFinish: 
-	function(message, thumbObject){
-		console.log(message, thumbObject.index);
+	function(thumbObject){
+		console.log(thumbObject);
 	}
 });
 ```
