@@ -222,13 +222,19 @@
 			{
 				if ((alignX==null || alignY==null) && (args[i][0] == "left" || args[i][0] == "right" || args[i][0] == "center"))
 				{
-					if (alignX != null && args[i][0] != "center" && alignX[0] == "center")
+					if (alignX == null)
+						alignX = args[i];
+
+					else if (alignY == null)
 					{
-						alignY = alignX;
-						alignX = args[i];
+						if (alignX[0] == "center")
+						{
+							alignY = alignX;
+							alignX = args[i];
+						}
+						else if (args[i][0] == "center")
+							alignY = args[i];
 					}
-					else if (alignX == null)
-						alignX = args[i];
 				}
 				else if (alignY == null && (args[i][0]=="top" || args[i][0]=="bottom"))
 					alignY = args[i];
