@@ -1,3 +1,5 @@
+[Live examples](http://josema.bitbucket.org/jthumb/)
+
 # [What is](#) #
 jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images preserving the proportions, and align them with total flexibility.
 
