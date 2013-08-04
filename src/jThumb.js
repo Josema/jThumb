@@ -137,7 +137,7 @@
 			// Alignment
 			var newPos = getPosition(config.alignX, config.alignY, thumbs[index].cWidth, thumbs[index].cHeight, newSize[0], newSize[1]);
 			if (options.background)
-				$(thumbs[index].iElem).css("backgroundPosition", newPos[0] + "px " + newPos[1] + "px");
+				$(thumbs[index].iElem).css("backgroundPosition", (newPos[0]+padding[0]) + "px " + (newPos[1]+padding[1]) + "px");
 			else
 			{
 				$(thumbs[index].iElem).css(options.moveX, (newPos[0]+padding[0]));
