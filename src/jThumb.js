@@ -28,7 +28,7 @@
      `odNMMMNmdhyso+/:-.``
 
 
-            https://bitbucket.org/EnZo/jthumb
+            https://bitbucket.org/josema/jthumb
 
 */
 
@@ -44,7 +44,7 @@
 
 	$.jThumb = function( elements, optionsInstance )
 	{
-		//var $this = this;
+		var $this = this;
 		var thumbs = [], options, loadeds, errors;
 		optionsInstance = $.extend( {}, $.jThumb.defaults, optionsInstance );
 
@@ -99,6 +99,24 @@
 		{
 			return thumbs[index];
 		}
+		
+		
+		this.update = function() // public
+		{
+			for (index in thumbs)
+			{
+				var tw = $(thumbs[index].cElem).width(),
+					th = $(thumbs[index].cElem).height();
+				if (thumbs[index].cWidth!=tw || thumbs[index].cHeight!=th)
+				{
+					thumbs[index].cWidth = tw;
+					thumbs[index].cHeight = th;
+					afterLoadRealSizeImage(index);
+				}
+			}
+		}
+		if (optionsInstance.autoUpdate)
+			$(window).resize($this.update);
 
 
 		function afterLoadRealSizeImage( index ) // private
@@ -326,6 +344,7 @@
 
 
 	$.jThumb.defaults = {
+		autoUpdate: false,
 		background: false,
 		img: "> img",
 		align: "center center",

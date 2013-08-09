@@ -8,7 +8,7 @@
 <script type="text/javascript">
 var thumb;
 $(document).ready(function() {
-	thumb = $(".thumbs").jThumb({ 
+	thumb = $("#thumbs").jThumb({ 
 		resize: true,
 		zoom: true,
 		crop: false,
@@ -22,7 +22,7 @@ $(document).ready(function() {
 });
 </script>
 <style>
-div.thumbs
+div#thumbs
 {
 	width:150px;
 	height:150px;
@@ -37,7 +37,7 @@ div.thumbs
 </head>
 <body>
 
-	<div class="thumbs" style="background-image:url('higher.jpg')"><div>text</div></div>
+	<div id="thumbs" style="background-image:url('higher.jpg')" jthumb="left(10)"><div>text</div></div>
 
 </body>
 </html>
