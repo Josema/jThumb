@@ -156,8 +156,8 @@ If you set this attribute as true, the image that has to be thumbed will be the 
 
 ```javascript
 $("div.thumbContainer").jThumb({
-	background:true,
-	img:null
+	background: true,
+	img: null
 });
 ```
 
@@ -169,8 +169,8 @@ Inner container:
 
 ```javascript
 $("div.thumbContainer").jThumb({
-	background:true,
-	img:"> div"
+	background: true,
+	img: "> div"
 });
 ```
 
@@ -263,7 +263,7 @@ Default moveY: `margin-top`
 
 
 
-
+## Events Parameters ##
 
 > ### Event `onError` (function)
 
@@ -362,5 +362,56 @@ $("div.thumbContainer").jThumb({ onFinish:
 ```
 
 Default is: `null`
+
+---
+
+
+
+
+## Methods ##
+
+> ### `set(optionsMethod:object [, useCache:boolean]) : void`
+
+You can set the config after create the instance with the method set.
+
+```javascript
+var mythumbs = $("div.thumbContainer").jThumb({ align: "right top" });
+```
+
+```javascript
+mythumbs.set({ align: "center center" });
+```
+
+If useCache is false the system will get the real size of the images again. If not will use the size when you created the instance.
+This is useful when you change to another image with javascript.
+
+Default optionsMethod: `null`
+Default useCache: `true`
+
+---
+
+
+
+
+> ### `update() : void`
+
+After created the instance. If your container it has been changed you can update to adapt the images to the new dimensions.
+
+```javascript
+mythumbs.update();
+```
+
+---
+
+
+
+
+> ### `getThumbByIndex( index:int ) : object`
+
+This method get the thumb properties with all the info saved inside the instance.
+
+```javascript
+mythumbs.getThumbByIndex( 2 );
+```
 
 ---
