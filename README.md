@@ -152,13 +152,112 @@ Default is: `false`
 
 > ### `background` (boolean)
 
-This event is dispatched after be changed the new config of all pictures.
+If you set this attribute as true, the image that has to be thumbed will be the background (CSS background-image) of the container defined by the img attribute instead of a <img> element.
 
 ```javascript
-$("div.thumbContainer").jThumb({ onFinish:false });
+$("div.thumbContainer").jThumb({
+	background:true,
+	img:null
+});
+```
+
+```html
+<div class="thumbContainer" style="background-image:url('higher.jpg')"></div>
+```
+
+Inner container:
+
+```javascript
+$("div.thumbContainer").jThumb({
+	background:true,
+	img:"> div"
+});
+```
+
+```html
+<div class="thumbContainer"><div style="background-image:url('higher.jpg')"></div></div>
 ```
 
 Default is: `false`
+
+---
+
+
+
+
+
+> ### `autoUpdate` (boolean)
+
+If your container has a percent size this will change when the size of the browser window change. Then if you want to auto adjust the thumb you should set this parameter as true.
+
+```javascript
+$("div.thumbContainer").jThumb({
+	autoUpdate:true
+});
+```
+
+Default is: `false`
+
+---
+
+
+
+
+
+
+
+
+> ### `attrName` (string)
+
+You can set the parameters on each element using the thumb attribute as html.
+
+
+```javascript
+$("div.thumbContainer").jThumb();
+```
+
+```html
+<div class="thumbContainer"><img jthumb="right bottom zoom nocrop" src="yourimage.jpg"></div>
+```
+
+
+Your own name for the html attribute:
+
+```javascript
+$("div.thumbContainer").jThumb({
+  attrName: "myOwnAttr"
+});
+```
+
+```html
+<div class="thumbContainer"><img myOwnAttr="right(25) bottom(-12) nozoom " src="yourimage.jpg"></div>
+```
+
+Default is: `"jthumb"`
+
+See more examples here: [http://josema.bitbucket.org/jthumb/](http://josema.bitbucket.org/jthumb/) 
+
+---
+
+
+
+
+
+
+
+> ### `moveX` and `moveY` (string)
+
+If you have a complex layout which have to set the position of the thumb with other attribute different to margin-left and margin-right (like top: left:) you can set it with this attribute.
+
+```javascript
+$("div.thumbContainer").jThumb({
+	moveX: "left",
+	moveY: "top"
+});
+```
+
+Default moveX: `margin-left`
+Default moveY: `margin-top`
 
 ---
 
