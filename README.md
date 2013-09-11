@@ -247,6 +247,43 @@ See more examples here: [http://josema.bitbucket.org/jthumb/](http://josema.bitb
 
 > ### `moveX` and `moveY` (string)
 
+If your image is defined as a position: absolute or relative, maybe you need use left and top instead of margin-left and margin-top.
+
+
+```html
+div.thumbContainer > img
+{
+	position:relative
+}
+```
+
+Your own name for the html attribute:
+
+```javascript
+$("div.thumbContainer").jThumb({
+  moveX: "left",
+  moveY: "top"
+});
+```
+
+```html
+<div class="thumbContainer"><img myOwnAttr="right(25) bottom(-12) nozoom " src="yourimage.jpg"></div>
+```
+
+Default is: `moveX: "margin-left"` and `moveY: "margin-top"`
+
+---
+
+
+
+
+
+
+
+
+
+> ### `moveX` and `moveY` (string)
+
 If you have a complex layout which have to set the position of the thumb with other attribute different to margin-left and margin-right (like top: left:) you can set it with this attribute.
 
 ```javascript
@@ -389,6 +426,11 @@ Default optionsMethod: `null`
 Default useCache: `true`
 
 ---
+
+
+
+
+
 
 
 
