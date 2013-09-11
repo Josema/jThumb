@@ -270,33 +270,11 @@ $("div.thumbContainer").jThumb({
 <div class="thumbContainer"><img myOwnAttr="right(25) bottom(-12) nozoom " src="yourimage.jpg"></div>
 ```
 
-Default is: `moveX: "margin-left"` and `moveY: "margin-top"`
+Default are: `moveX: "margin-left"` and `moveY: "margin-top"`
 
 ---
 
 
-
-
-
-
-
-
-
-> ### `moveX` and `moveY` (string)
-
-If you have a complex layout which have to set the position of the thumb with other attribute different to margin-left and margin-right (like top: left:) you can set it with this attribute.
-
-```javascript
-$("div.thumbContainer").jThumb({
-	moveX: "left",
-	moveY: "top"
-});
-```
-
-Default moveX: `margin-left`
-Default moveY: `margin-top`
-
----
 
 
 
