@@ -251,7 +251,7 @@ If your image is defined as a position: absolute or relative, maybe you need use
 
 
 ```html
-div.thumbContainer > img
+div.thumbContainer > img.posrelative
 {
 	position:relative
 }
@@ -261,13 +261,10 @@ Your own name for the html attribute:
 
 ```javascript
 $("div.thumbContainer").jThumb({
+  img: "> img.posrelative",
   moveX: "left",
   moveY: "top"
 });
-```
-
-```html
-<div class="thumbContainer"><img myOwnAttr="right(25) bottom(-12) nozoom " src="yourimage.jpg"></div>
 ```
 
 Default are: `moveX: "margin-left"` and `moveY: "margin-top"`
