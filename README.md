@@ -3,7 +3,7 @@
 # [What is](#) #
 jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images preserving the proportions, and align them with total flexibility.
 
-[Live examples](http://josema.bitbucket.org/jthumb/)
+[Live examples](http://josenzo.github.io/jThumb/)
 
 # [How to use](#) #
 
@@ -228,7 +228,7 @@ $("div.thumbContainer").jThumb({
 
 Default is: `"jthumb"`
 
-See more examples here: [http://josema.bitbucket.org/jthumb/](http://josema.bitbucket.org/jthumb/) 
+See more examples here: [http://josenzo.github.io/jThumb/](http://josenzo.github.io/jThumb/) 
 
 ---
 
