@@ -28,7 +28,7 @@
      `odNMMMNmdhyso+/:-.``
 
 
-            https://bitbucket.org/josema/jthumb
+            https://github.com/Josenzo/jThumb
 
 */
 

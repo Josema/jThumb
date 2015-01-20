@@ -90,7 +90,7 @@ Default is: `"> img"`
 
 If you set crop as false the picture never will have remaining space.
 
-![Crop](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/crop.jpg)
+![Crop](https://raw.githubusercontent.com/Josenzo/jThumb/master/documentation/crop.jpg)
 
 ```js
 $("div.thumbContainer").jThumb({ crop: false });
@@ -111,7 +111,7 @@ Default is: `true`
 
 If you set resize as false and the picture is higher than the container, the picture never will be resized.
 
-![Resize](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/resize.jpg)
+![Resize](https://raw.githubusercontent.com/Josenzo/jThumb/master/documentation/resize.jpg)
 
 ```js
 $("div.thumbContainer").jThumb({ resize: false });
@@ -130,7 +130,7 @@ Default is: `true`
 
 If you set zoom as true and the original image is smaller than the container, the size of the picture will be resized. Default is false because this could cause distorsion of the picture.
 
-![Zoom](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/zoom.jpg)
+![Zoom](https://raw.githubusercontent.com/Josenzo/jThumb/master/documentation/zoom.jpg)
 
 ```js
 $("div.thumbContainer").jThumb({ zoom: true });
