@@ -5,11 +5,6 @@ jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images pr
 
 [Live examples](http://josema.bitbucket.org/jthumb/)
 
-* * *
-* * *
-* * *
-
-
 # [How to use](#) #
 
 # 1. Add your image under a container
@@ -21,7 +16,7 @@ jThumb is **jQuery plugin** to make easier thumbs on html. Resize your images pr
 
 # 2. Add the CSS for the container.
 
-```html
+```css
 div.thumbContainer
 {
 	width:150px;
@@ -34,15 +29,13 @@ You have to add the overflow hidden to hide the remaining space of the image.
 
 # 3. Add the javascript.
 
-```javascript
+```js
 $(document).ready(function() {
 	$("div.thumbContainer").jThumb();
 });
 ```
 
-* * *
-* * *
-* * *
+
 
 # [Documentation](#) #
 
@@ -51,7 +44,7 @@ $(document).ready(function() {
 
 > ### `align` (string)
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ align: "right bottom" });
 ```
 Default is: `"center center"`
@@ -78,7 +71,7 @@ This attributte is used when you have a complex layout on your html, for example
 ```
 Then you should use something like this:
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ img: "div a img.tothumb" });
 ```
 Default is: `"> img"`
@@ -99,7 +92,7 @@ If you set crop as false the picture never will have remaining space.
 
 ![Crop](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/crop.jpg)
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ crop: false });
 ```
 
@@ -120,7 +113,7 @@ If you set resize as false and the picture is higher than the container, the pic
 
 ![Resize](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/resize.jpg)
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ resize: false });
 ```
 
@@ -139,7 +132,7 @@ If you set zoom as true and the original image is smaller than the container, th
 
 ![Zoom](https://bitbucket.org/josema/jthumb/raw/3b3e69dac8b0cb77869e68a916819b2a52865786/documentation/zoom.jpg)
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ zoom: true });
 ```
 
@@ -154,7 +147,7 @@ Default is: `false`
 
 If you set this attribute as true, the image that has to be thumbed will be the background (CSS background-image) of the container defined by the img attribute instead of a <img> element.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({
 	background: true,
 	img: null
@@ -167,7 +160,7 @@ $("div.thumbContainer").jThumb({
 
 Inner container:
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({
 	background: true,
 	img: "> div"
@@ -190,7 +183,7 @@ Default is: `false`
 
 If your container has a percent size this will change when the size of the browser window change. Then if you want to auto adjust the thumb you should set this parameter as true.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({
 	autoUpdate:true
 });
@@ -212,7 +205,7 @@ Default is: `false`
 You can set the parameters on each element using the thumb attribute as html.
 
 
-```javascript
+```js
 $("div.thumbContainer").jThumb();
 ```
 
@@ -223,7 +216,7 @@ $("div.thumbContainer").jThumb();
 
 Your own name for the html attribute:
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({
   attrName: "myOwnAttr"
 });
@@ -259,7 +252,7 @@ div.thumbContainer > img.posrelative
 
 Your own name for the html attribute:
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({
   img: "> img.posrelative",
   moveX: "left",
@@ -281,7 +274,7 @@ Default are: `moveX: "margin-left"` and `moveY: "margin-top"`
 
 It's dispatched when some error is occurred.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ onError: 
 	function(message, thumbObject){
 		console.log(message, thumbObject.index);
@@ -299,7 +292,7 @@ Default is: `null`
 
 To get the original size of the picture is necessary create a temporal image object and load the picture inside. So this event is dispatched when picture is loaded.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ onLoadImage: 
 	function(tempImage, thumbObject){
 		console.log(tempImage, thumbObject.index);
@@ -319,7 +312,7 @@ Default is: `null`
 
 This event is dispatched before to be changed the position or size.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ onBefore: 
 	function(thumbObject){
 		console.log(thumbObject);
@@ -342,7 +335,7 @@ Default is: `null`
 
 This event is dispatched after to be changed the position or size.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ onAfter: 
 	function(thumbObject){
 		console.log(thumbObject);
@@ -365,7 +358,7 @@ Default is: `null`
 
 This event is dispatched after be changed the new config of all pictures.
 
-```javascript
+```js
 $("div.thumbContainer").jThumb({ onFinish: 
 	function(thumbObject){
 		console.log(thumbObject);
@@ -386,11 +379,11 @@ Default is: `null`
 
 You can set the config after create the instance with the method set.
 
-```javascript
+```js
 var mythumbs = $("div.thumbContainer").jThumb({ align: "right top" });
 ```
 
-```javascript
+```js
 mythumbs.set({ align: "center center" });
 ```
 
@@ -414,7 +407,7 @@ Default useCache: `true`
 
 After created the instance. If your container it has been changed you can update to adapt the images to the new dimensions.
 
-```javascript
+```js
 mythumbs.update();
 ```
 
@@ -427,7 +420,7 @@ mythumbs.update();
 
 This method get the thumb properties with all the info saved inside the instance.
 
-```javascript
+```js
 mythumbs.getThumbByIndex( 2 );
 ```
 
